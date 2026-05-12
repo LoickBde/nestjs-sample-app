@@ -1,0 +1,8 @@
+{
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "js/ts.referencesCodeLens.enabled": true,
+    "js/ts.referencesCodeLens.showOnAllFunctions": true
+}
