@@ -12,6 +12,6 @@ export class ConsoleLoggerService {
   ) {}
   log(message: string) {
     if (this.appConfig.enableLogging)
-      console.log(`[ ${this.appConfig.appName} LOG] ${message}`);
+      console.log(`[ ${this.appConfig.appName} LOG ] ${message}`);
   }
 }
