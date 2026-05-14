@@ -14,4 +14,9 @@ export class CatsController {
   findOne(@Param('id') id: string) {
     return this.catsService.findOne(Number(id));
   }
+
+  @Get('debug/calls/findAll')
+  getFindAllCallsCount() {
+    return { callsCount: this.catsService.getFindAllCallsCount() };
+  }
 }

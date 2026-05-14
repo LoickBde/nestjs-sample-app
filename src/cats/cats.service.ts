@@ -17,8 +17,11 @@ export class CatsService {
     private logger: { log(message: string): void },
   ) {}
 
+  private callsCount = 0;
+
   findAll() {
     this.logger.log(`${this.appConfig.appName} - findAll called`);
+    this.callsCount++;
     return this.catsRepository.findAll();
   }
 
@@ -36,5 +39,9 @@ export class CatsService {
     this.cacheService.set(cacheKey, cat);
 
     return cat;
+  }
+
+  getFindAllCallsCount() {
+    return this.callsCount;
   }
 }
