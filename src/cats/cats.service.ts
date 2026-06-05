@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CatsRepository } from './cats.repository';
-import { CacheService } from 'src/cache/cache.service';
+import { CacheService } from '../cache/cache.service';
+import { TransientService } from '../transient/transient.service';
 
 @Injectable()
 export class CatsService {
@@ -15,6 +16,8 @@ export class CatsService {
 
     @Inject('LOGGER')
     private logger: { log(message: string): void },
+
+    private transientService: TransientService,
   ) {}
 
   private callsCount = 0;
@@ -43,5 +46,9 @@ export class CatsService {
 
   getFindAllCallsCount() {
     return this.callsCount;
+  }
+
+  getTransientId() {
+    return this.transientService.getInstanceId();
   }
 }

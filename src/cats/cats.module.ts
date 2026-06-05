@@ -2,8 +2,9 @@ import { Module } from '@nestjs/common';
 import { CatsController } from './cats.controller';
 import { CatsService } from './cats.service';
 import { CatsRepository } from './cats.repository';
-import { ConsoleLoggerService } from 'src/logger/console-logger.service';
-import { CacheService } from 'src/cache/cache.service';
+import { ConsoleLoggerService } from '../logger/console-logger.service';
+import { CacheService } from '../cache/cache.service';
+import { TransientService } from '../transient/transient.service';
 
 @Module({
   imports: [],
@@ -34,6 +35,7 @@ import { CacheService } from 'src/cache/cache.service';
       inject: ['APP_CONFIG', 'LOGGER'],
     },
     // RequestContextService,
+    TransientService,
   ],
 })
 export class CatsModule {}

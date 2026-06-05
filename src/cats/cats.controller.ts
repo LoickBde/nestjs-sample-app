@@ -1,11 +1,13 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { CatsService } from './cats.service';
+import { TransientService } from '../transient/transient.service';
 
 @Controller('cats')
 export class CatsController {
   constructor(
     private catsService: CatsService,
     // private requestContextService: RequestContextService,
+    private transientService: TransientService,
   ) {
     console.log('[CatsController] 🆕 Nouvelle instance créée !');
   }
@@ -25,10 +27,19 @@ export class CatsController {
     return { callsCount: this.catsService.getFindAllCallsCount() };
   }
 
-  // @Get('debug/request-id')
-  // getRequestId() {
+  // @Get('debug/calls/requestContext')
+  // getRequestContextCallsCount() {
   //   return {
-  //     requestId: this.requestContextService.getRequestId(),
+  //     callsCount: this.requestContextService.getCallsCount(),
   //   };
   // }
+
+  @Get('debug/transient')
+  getTransientIds() {
+    return {
+      explication: 'Chacun a sa propre instance.',
+      controllerTransientId: this.transientService.getInstanceId(),
+      serviceTransientId: this.catsService.getTransientId(),
+    };
+  }
 }
