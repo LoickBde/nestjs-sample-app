@@ -5,6 +5,7 @@ import { CatsRepository } from './cats.repository';
 import { ConsoleLoggerService } from '../logger/console-logger.service';
 import { CacheService } from '../cache/cache.service';
 import { TransientService } from '../transient/transient.service';
+import { APP_CONFIG, CACHE_SERVICE, LOGGER } from 'src/common/token';
 
 @Module({
   imports: [],
@@ -13,7 +14,7 @@ import { TransientService } from '../transient/transient.service';
     CatsService,
     CatsRepository,
     {
-      provide: 'APP_CONFIG',
+      provide: APP_CONFIG,
       useValue: {
         appName: 'Cats App',
         enableCache: true,
@@ -21,18 +22,18 @@ import { TransientService } from '../transient/transient.service';
       },
     },
     {
-      provide: 'LOGGER',
+      provide: LOGGER,
       useClass: ConsoleLoggerService,
     },
     {
-      provide: 'CACHE_SERVICE',
+      provide: CACHE_SERVICE,
       useFactory: (
         appConfig: { enableCache: boolean },
         logger: { log(message: string): void },
       ) => {
         return new CacheService(appConfig, logger);
       },
-      inject: ['APP_CONFIG', 'LOGGER'],
+      inject: [APP_CONFIG, LOGGER],
     },
     // RequestContextService,
     TransientService,

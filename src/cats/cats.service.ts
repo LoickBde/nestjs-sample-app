@@ -2,19 +2,20 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CatsRepository } from './cats.repository';
 import { CacheService } from '../cache/cache.service';
 import { TransientService } from '../transient/transient.service';
+import { APP_CONFIG, CACHE_SERVICE, LOGGER } from 'src/common/token';
 
 @Injectable()
 export class CatsService {
   constructor(
     private catsRepository: CatsRepository,
 
-    @Inject('CACHE_SERVICE')
+    @Inject(CACHE_SERVICE)
     private cacheService: CacheService,
 
-    @Inject('APP_CONFIG')
+    @Inject(APP_CONFIG)
     private appConfig: { appName: string; enableCache: boolean },
 
-    @Inject('LOGGER')
+    @Inject(LOGGER)
     private logger: { log(message: string): void },
 
     private transientService: TransientService,

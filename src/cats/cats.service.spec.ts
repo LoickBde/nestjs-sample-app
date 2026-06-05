@@ -5,6 +5,7 @@ import { CatsService } from './cats.service';
 import { CatsRepository } from './cats.repository';
 import { CacheService } from '../cache/cache.service';
 import { TransientService } from '../transient/transient.service';
+import { APP_CONFIG, CACHE_SERVICE, LOGGER } from 'src/common/token';
 
 describe('CatsService', () => {
   let service: CatsService;
@@ -44,18 +45,18 @@ describe('CatsService', () => {
           useValue: catsRepositoryMockObj,
         },
         {
-          provide: 'CACHE_SERVICE',
+          provide: CACHE_SERVICE,
           useValue: cacheServiceMockObj,
         },
         {
-          provide: 'APP_CONFIG',
+          provide: APP_CONFIG,
           useValue: {
             appName: 'Cats Test App',
             enableCache: true,
           },
         },
         {
-          provide: 'LOGGER',
+          provide: LOGGER,
           useValue: loggerMock,
         },
         TransientService,
