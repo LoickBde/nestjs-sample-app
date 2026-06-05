@@ -33,6 +33,7 @@ import { CacheService } from 'src/cache/cache.service';
       },
       inject: ['APP_CONFIG', 'LOGGER'],
     },
+    // RequestContextService,
   ],
 })
 export class CatsModule {}

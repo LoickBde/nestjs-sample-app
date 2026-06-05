@@ -3,7 +3,12 @@ import { CatsService } from './cats.service';
 
 @Controller('cats')
 export class CatsController {
-  constructor(private catsService: CatsService) {}
+  constructor(
+    private catsService: CatsService,
+    // private requestContextService: RequestContextService,
+  ) {
+    console.log('[CatsController] 🆕 Nouvelle instance créée !');
+  }
 
   @Get()
   findAll() {
@@ -19,4 +24,11 @@ export class CatsController {
   getFindAllCallsCount() {
     return { callsCount: this.catsService.getFindAllCallsCount() };
   }
+
+  // @Get('debug/request-id')
+  // getRequestId() {
+  //   return {
+  //     requestId: this.requestContextService.getRequestId(),
+  //   };
+  // }
 }
